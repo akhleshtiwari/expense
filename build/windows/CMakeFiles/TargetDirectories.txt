@@ -1,0 +1,10 @@
+C:/Flutter/expense_tracker/build/windows/CMakeFiles/INSTALL.dir
+C:/Flutter/expense_tracker/build/windows/CMakeFiles/ALL_BUILD.dir
+C:/Flutter/expense_tracker/build/windows/CMakeFiles/ZERO_CHECK.dir
+C:/Flutter/expense_tracker/build/windows/flutter/CMakeFiles/flutter_wrapper_plugin.dir
+C:/Flutter/expense_tracker/build/windows/flutter/CMakeFiles/flutter_wrapper_app.dir
+C:/Flutter/expense_tracker/build/windows/flutter/CMakeFiles/flutter_assemble.dir
+C:/Flutter/expense_tracker/build/windows/flutter/CMakeFiles/INSTALL.dir
+C:/Flutter/expense_tracker/build/windows/runner/CMakeFiles/expense_tracker.dir
+C:/Flutter/expense_tracker/build/windows/runner/CMakeFiles/INSTALL.dir
+C:/Flutter/expense_tracker/build/windows/runner/CMakeFiles/ALL_BUILD.dir
