@@ -34,13 +34,15 @@ class _ExpensesState extends State<Expenses> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: const Text(" Expense Tracker"),
         actions: [
-          IconButton(onPressed: _openaddexpenseOverlay, icon: Icon(Icons.add))
+          IconButton(
+              onPressed: _openaddexpenseOverlay, icon: const Icon(Icons.add))
         ],
       ),
       body: Column(
         children: [
-          Text('chart'),
+          const Text('chart'),
           Expanded(child: ExpensesList(expenses: _registeredExpenses))
         ],
       ),
