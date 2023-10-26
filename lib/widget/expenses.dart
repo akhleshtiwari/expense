@@ -32,13 +32,35 @@ class _ExpensesState extends State<Expenses> {
     });
   }
 
+  void _removeExpense(Expense expense) {
+    setState(() {
+      _registeredExpenses.remove(expense);
+    });
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        duration: Duration(seconds: 3), content: Text("Expense Deleted")));
+  }
+
   void _openaddexpenseOverlay() {
     showModalBottomSheet(
-        context: context, builder: (ctx) => const NewExpense());
+        isScrollControlled: true,
+        context: context,
+        builder: (ctx) => NewExpense(
+              onAddExppense: addExpense,
+            ));
   }
 
   @override
   Widget build(BuildContext context) {
+    Widget maincontent =
+        const Center(child: Text("expense is empty plzz add some expenses"));
+
+    if (_registeredExpenses.isNotEmpty) {
+      maincontent = ExpensesList(
+        expenses: _registeredExpenses,
+        onRemoveExpense: _removeExpense,
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(" Expense Tracker"),
@@ -48,10 +70,7 @@ class _ExpensesState extends State<Expenses> {
         ],
       ),
       body: Column(
-        children: [
-          const Text('chart'),
-          Expanded(child: ExpensesList(expenses: _registeredExpenses))
-        ],
+        children: [const Text('chart'), Expanded(child: maincontent)],
       ),
     );
   }

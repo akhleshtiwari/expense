@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import '../models/expense.dart';
 
 class NewExpense extends StatefulWidget {
-  const NewExpense({super.key});
+  const NewExpense({super.key, required this.onAddExppense});
+
+  final void Function(Expense expense) onAddExppense;
 
   @override
   State<NewExpense> createState() => _NewExpenseState();
@@ -38,6 +40,12 @@ class _NewExpenseState extends State<NewExpense> {
       );
       return;
     }
+    widget.onAddExppense(Expense(
+        title: _titleController.text,
+        amount: enteredAmount,
+        date: _selectedDate!,
+        category: _selectedCategory));
+    Navigator.pop(context);
   }
 
   void _showDatePicker() async {
@@ -64,7 +72,7 @@ class _NewExpenseState extends State<NewExpense> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.fromLTRB(16, 48, 16, 16),
       child: Column(
         children: [
           TextField(
