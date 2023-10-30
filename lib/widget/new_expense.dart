@@ -26,8 +26,8 @@ class _NewExpenseState extends State<NewExpense> {
         context: context,
         builder: (ctx) => AlertDialog(
           title: const Text("Invalid Input"),
-          content: const Text(
-              "please make sure  valid amount,text,date and category are entered"),
+          content:
+              const Text("Please filled valid title,amount,date and category "),
           actions: [
             TextButton(
               onPressed: () {
@@ -89,7 +89,7 @@ class _NewExpenseState extends State<NewExpense> {
                   decoration: const InputDecoration(label: Text('Amount')),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 16,
               ),
               Expanded(
@@ -106,7 +106,7 @@ class _NewExpenseState extends State<NewExpense> {
               )),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Row(
@@ -136,7 +136,7 @@ class _NewExpenseState extends State<NewExpense> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text("cancel")),
+                  child: const Text("Close")),
               ElevatedButton(
                 onPressed: _submittedExpenseData,
                 child: const Text("Save Expense"),

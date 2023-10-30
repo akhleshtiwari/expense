@@ -3,6 +3,7 @@ import 'package:expense_tracker/models/expense.dart';
 import 'package:expense_tracker/widget/new_expense.dart';
 import 'package:flutter/material.dart';
 
+import 'chart/chart.dart';
 import 'expenses_list/expenses_list.dart';
 
 class Expenses extends StatefulWidget {
@@ -15,12 +16,12 @@ class Expenses extends StatefulWidget {
 class _ExpensesState extends State<Expenses> {
   final List<Expense> _registeredExpenses = [
     Expense(
-        title: 'flutter all course',
+        title: 'Books',
         amount: 19.99,
         date: DateTime.now(),
         category: Category.work),
     Expense(
-        title: 'cinema',
+        title: 'Cinema',
         amount: 15.69,
         date: DateTime.now(),
         category: Category.leisure),
@@ -33,11 +34,23 @@ class _ExpensesState extends State<Expenses> {
   }
 
   void _removeExpense(Expense expense) {
+    final expenseIndex = _registeredExpenses.indexOf(expense);
     setState(() {
       _registeredExpenses.remove(expense);
     });
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        duration: Duration(seconds: 3), content: Text("Expense Deleted")));
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+          duration: const Duration(seconds: 3),
+          content: Text("Expenses Deleted"),
+          action: SnackBarAction(
+              label: "undo",
+              onPressed: () {
+                setState(() {
+                  _registeredExpenses.insert(expenseIndex, expense);
+                });
+              })),
+    );
   }
 
   void _openaddexpenseOverlay() {
@@ -52,7 +65,7 @@ class _ExpensesState extends State<Expenses> {
   @override
   Widget build(BuildContext context) {
     Widget maincontent =
-        const Center(child: Text("expense is empty plzz add some expenses"));
+        const Center(child: Text("expenses is empty plzz add some expenses"));
 
     if (_registeredExpenses.isNotEmpty) {
       maincontent = ExpensesList(
@@ -63,14 +76,17 @@ class _ExpensesState extends State<Expenses> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(" Expense Tracker"),
+        title: const Text("Expense Tracker"),
         actions: [
           IconButton(
               onPressed: _openaddexpenseOverlay, icon: const Icon(Icons.add))
         ],
       ),
       body: Column(
-        children: [const Text('chart'), Expanded(child: maincontent)],
+        children: [
+          Chart(expenses: _registeredExpenses),
+          Expanded(child: maincontent)
+        ],
       ),
     );
   }
