@@ -21,7 +21,7 @@ class _ExpensesState extends State<Expenses> {
         date: DateTime.now(),
         category: Category.work),
     Expense(
-        title: 'Cinema',
+        title: 'cinema',
         amount: 15.69,
         date: DateTime.now(),
         category: Category.leisure),
@@ -64,6 +64,7 @@ class _ExpensesState extends State<Expenses> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     Widget maincontent =
         const Center(child: Text("expenses is empty plzz add some expenses"));
 
@@ -75,19 +76,27 @@ class _ExpensesState extends State<Expenses> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Expense Tracker"),
-        actions: [
-          IconButton(
-              onPressed: _openaddexpenseOverlay, icon: const Icon(Icons.add))
-        ],
-      ),
-      body: Column(
-        children: [
-          Chart(expenses: _registeredExpenses),
-          Expanded(child: maincontent)
-        ],
-      ),
-    );
+        appBar: AppBar(
+          title: const Text("Expense Tracker"),
+          actions: [
+            IconButton(
+                onPressed: _openaddexpenseOverlay, icon: const Icon(Icons.add))
+          ],
+        ),
+        body: width < 600
+            ? Column(
+                children: [
+                  Chart(expenses: _registeredExpenses),
+                  Expanded(child: maincontent)
+                ],
+              )
+            : Row(
+                children: [
+                  Expanded(
+                    child: Chart(expenses: _registeredExpenses),
+                  ),
+                  Expanded(child: maincontent)
+                ],
+              ));
   }
 }
